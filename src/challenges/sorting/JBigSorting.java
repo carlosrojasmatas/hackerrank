@@ -1,4 +1,4 @@
-package challenges;
+package challenges.sorting;
 
 import scala.math.BigInt;
 

@@ -1,4 +1,4 @@
-package challenges
+package challenges.sorting
 
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
@@ -73,7 +73,6 @@ object FullCountingSort {
       else {
         val (i, el) = rem.head
         curr(i) = curr(i).append(el)
-        val t = rem.tail
         fill(curr, rem.tail)
       }
     }

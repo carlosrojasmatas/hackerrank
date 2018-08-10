@@ -1,4 +1,4 @@
-package challenges
+package challenges.sorting
 
 import java.io.{BufferedReader, InputStreamReader}
 
