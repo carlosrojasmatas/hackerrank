@@ -1,3 +1,14 @@
-out
+**/target/*
+.classpath
+project
+.settings/*
+**/*.log
+**/logs/*
+bin/*
 .idea
-*.txt
+*\.iml
+*\.ipr
+*\.iws
+*\.zip
+
+
