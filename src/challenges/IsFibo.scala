@@ -26,8 +26,8 @@ object IsFibo {
 
 
   def isFibo(n:BigInt):Boolean = {
-    isPerfectSquare(5*Math.pow(n.doubleValue(),2) + 4 )  || isPerfectSquare(5*Math.pow(n.doubleValue(),2) - 4)
+    isPerfectSquare(5*Math.pow(n.doubleValue,2) + 4 )  || isPerfectSquare(5*Math.pow(n.doubleValue,2) - 4)
   }
 
-  def isPerfectSquare(n:Double):Boolean = Math.sqrt(n.doubleValue()).isWhole()
+  def isPerfectSquare(n:Double):Boolean = Math.sqrt(n.doubleValue()).isWhole
 }
