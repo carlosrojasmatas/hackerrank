@@ -63,30 +63,21 @@ public class SwapNodes {
     private static List<Integer> traverseInOrder(List<Integer> path, Node curr, int q) {
 
         if (curr.level % q == 0) {
-            if (curr.right.value != -1 && curr.right != null) {
-                traverseInOrder(path, curr.right, 1);
-            }
-
-            path.add(curr.value);
-
-            if (curr.left.value != -1 && curr.left != null) {
-                traverseInOrder(path, curr.left, 1);
-            }
 
             Node tmp = curr.left;
-            curr.left=curr.right;
+            curr.left = curr.right;
             curr.right = tmp;
 
-        } else {
-            if (curr.left.value != -1 && curr.left != null) {
-                traverseInOrder(path, curr.left, 1);
-            }
+        }
 
-            path.add(curr.value);
+        if (curr.left.value != -1 && curr.left != null) {
+            traverseInOrder(path, curr.left, q);
+        }
 
-            if (curr.right.value != -1 && curr.right != null) {
-                traverseInOrder(path, curr.right, 1);
-            }
+        path.add(curr.value);
+
+        if (curr.right.value != -1 && curr.right != null) {
+            traverseInOrder(path, curr.right, q);
         }
 
 
