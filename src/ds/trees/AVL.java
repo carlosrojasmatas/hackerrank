@@ -66,12 +66,15 @@ public class AVL {
     static int height(Node node) {
         if (node == null)
             return -1;
-        else
-            return 1 + Math.max(height(node.left), height(node.right));
+        else{
+            int ht = 1 + Math.max(height(node.left), height(node.right));
+            node.ht = ht;
+            return ht;
+        }
     }
 
     static Node rotateRight(Node node) {
-        if (node.left.left == null) { //left right case
+        if ( height(node.left.left) < height(node.left.right) ) { //left right case
             Node temp = node.left.right;
             node.left.right = temp.left;
             temp.left = node.left;
@@ -85,14 +88,13 @@ public class AVL {
 
         int rh = height(newNode.right);
         int lh = height(newNode.left);
-        newNode.right.ht = rh;
-        newNode.left.ht = lh;
+        newNode.ht = 1 + Math.max(rh, lh);
 
         return newNode;
     }
 
     static Node rotateLeft(Node node) {
-        if (node.right.right == null) {
+        if (height(node.right.left) > height(node.right.right)) {
             Node temp = node.right.left;
             node.right.left = temp.right;
             temp.right = node.right;
@@ -105,9 +107,6 @@ public class AVL {
 
         int rh = height(newNode.right);
         int lh = height(newNode.left);
-        newNode.right.ht = rh;
-        newNode.left.ht = lh;
-
         newNode.ht = 1 + Math.max(rh, lh);
 
         return newNode;
@@ -117,15 +116,45 @@ public class AVL {
         if (root == null) {
             return;
         }
+//        if(root.val == 184){
+//            System.out.println("a");
+//        }
         printInOrder(root.left);
-        System.out.print("-" + root.val);
+        int bf = 0;
+        if(root.left == null){
+            if(root.right == null){
+                bf = 0;
+            }else{
+                bf = -1;
+            }
+        }else{
+            if(root.right == null){
+                bf = 1;
+            }else{
+                bf = root.left.ht - root.right.ht;
+            }
+        }
+        System.out.print(root.val + "(BF=" + bf + ") " );
         printInOrder(root.right);
 }
 
     static void printPostOrder(Node root) {
         if (root == null) return;
-
-        System.out.print("-" + root.val);
+        int bf = 0;
+        if(root.left == null){
+            if(root.right == null){
+                bf = 0;
+            }else{
+                bf = -1;
+            }
+        }else{
+            if(root.right == null){
+                bf = 1;
+            }else{
+                bf = root.left.ht - root.right.ht;
+            }
+        }
+        System.out.print(root.val + "(BF=" + bf + ") " );
         printPostOrder(root.left);
         printPostOrder(root.right);
     }
@@ -137,7 +166,7 @@ public class AVL {
 //        23
 //        190 108 143 144 111 51 17 90 184 172 196 83 20 117 7 188 114 173 62 112 70 12 55
 //        99
-        
+
         int n = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
