@@ -6,29 +6,24 @@ import java.util.Scanner;
 public class TripleSum {
 
 
-
     // Complete the triplets function below.
     static long triplets(int[] a, int[] b, int[] c) {
-        //remove duplicates
-        a = removeDuplicates(a);
-        b = removeDuplicates(b);
-        c = removeDuplicates(c);
 
-        Arrays.sort(a);
-        Arrays.sort(b);
-        Arrays.sort(c);
+        //remove duplicates
+        a = deduplicateAndSort(a);
+        b = deduplicateAndSort(b);
+        c = deduplicateAndSort(c);
+
 
         long count = 0;
 
         int i = 0;
         while (i < b.length) {
 
-            int aidx = findFirstMin(a,0,a.length - 1,b[i]) + 1;
-            int cidx = findFirstMin(c,0,c.length - 1,b[i]) + 1;
+            long aidx = findFirstMin(a, 0, a.length - 1, b[i]) + 1;
+            long cidx = findFirstMin(c, 0, c.length - 1, b[i]) + 1;
 
-            if(aidx >= 0 && cidx >=0 ){
-                count += (aidx * cidx );
-            }
+            count += (aidx * cidx);
             i++;
 
         }
@@ -37,44 +32,38 @@ public class TripleSum {
 
     }
 
-    private static int findFirstMin(int[] a, int start, int end, int target){
+    private static int findFirstMin(int[] a, int start, int end, int target) {
 
 
-        if(start > end){
+        if (start > end) {
             return -1;
 
         }
-        if(a[end]<=target){
+        if (a[end] <= target) {
             return end;
         }
 
 
         int mid = (start + end) / 2;
 
-        if(a[mid] == target){
+        if (a[mid] == target) {
             return mid;
         }
 
-        if(mid > 0 && a[mid -1] <= target && target < a[mid]){
-            return mid -1;
+        if (mid > 0 && a[mid - 1] <= target && target < a[mid]) {
+            return mid - 1;
         }
 
-        if(target< a[mid]){
-            return findFirstMin(a,start,mid - 1,target);
+        if (target < a[mid]) {
+            return findFirstMin(a, start, mid - 1, target);
         }
 
-        return findFirstMin(a,mid + 1,end,target);
+        return findFirstMin(a, mid + 1, end, target);
     }
 
 
-    private static int[] removeDuplicates(int[] a) {
-        int[] r = new int[a.length];
-        r[0] = a[0];
-        for (int i = 1; i < a.length; i++) {
-            if (a[i] != a[i - 1]) {
-                r[i] = a[i];
-            }
-        }
+    private static int[] deduplicateAndSort(int[] a) {
+        int[] r = Arrays.stream(a).boxed().distinct().sorted().mapToInt(x -> x).toArray();
         return r;
     }
 
