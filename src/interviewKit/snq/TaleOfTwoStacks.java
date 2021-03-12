@@ -1,4 +1,4 @@
-package interviewKit.queues;
+package interviewKit.snq;
 
 import java.util.LinkedList;
 import java.util.Queue;

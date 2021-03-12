@@ -1,4 +1,4 @@
-package interviewKit.queues;
+package interviewKit.snq;
 
 import java.io.IOException;
 import java.util.Scanner;
